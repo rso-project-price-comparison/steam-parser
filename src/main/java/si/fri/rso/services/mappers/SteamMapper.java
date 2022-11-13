@@ -1,17 +1,26 @@
 package si.fri.rso.services.mappers;
 
+import si.fri.rso.services.dtos.GameBySearchDto;
 import si.fri.rso.services.dtos.GamePriceDto;
 import si.fri.rso.services.dtos.game_price_response.GamePriceResponse;
 import si.fri.rso.services.dtos.game_price_response.PriceData;
+import si.fri.rso.services.dtos.games_by_search_response.GamesBySearchResponse;
 
 import javax.enterprise.context.RequestScoped;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 @RequestScoped
-public class GamePriceDtoMapper {
+public class SteamMapper {
 
-    public GamePriceDto toDto(Map<String, GamePriceResponse> response) {
+    public List<GameBySearchDto> toGameBySearchDto(List<GamesBySearchResponse> response) {
+        return response.stream()
+                .map(g -> new GameBySearchDto(g.name(), g.appid()))
+                .toList();
+    }
+
+    public GamePriceDto toGamePriceDto(Map<String, GamePriceResponse> response) {
 
         Map.Entry<String, GamePriceResponse> gamePriceResponse = response.entrySet().iterator().next();
         String key = gamePriceResponse.getKey();
@@ -29,5 +38,4 @@ public class GamePriceDtoMapper {
 
         return new GamePriceDto(key, finalPrice, priceData.priceOverview().currency());
     }
-
 }

@@ -8,8 +8,7 @@ import si.fri.rso.services.dtos.GameBySearchDto;
 import si.fri.rso.services.dtos.GamePriceDto;
 import si.fri.rso.services.SteamCommunityService;
 import si.fri.rso.services.SteamService;
-import si.fri.rso.services.mappers.GameBySearchDtoMapper;
-import si.fri.rso.services.mappers.GamePriceDtoMapper;
+import si.fri.rso.services.mappers.SteamMapper;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -26,9 +25,7 @@ public class SteamResource {
     @RestClient
     SteamService steamService;
     @Inject
-    GameBySearchDtoMapper gameBySearchDtoMapper;
-    @Inject
-    GamePriceDtoMapper gamePriceDtoMapper;
+    SteamMapper steamMapper;
 
     @PostConstruct
     void init() {
@@ -39,7 +36,7 @@ public class SteamResource {
     @GET
     @Path("/games")
     public List<GameBySearchDto> getGamesBySearchString(@QueryParam("searchString")String searchString) {
-        return gameBySearchDtoMapper.toDto(steamCommunityService.getGameBySearch(searchString));
+        return steamMapper.toGameBySearchDto(steamCommunityService.getGameBySearch(searchString));
     }
 
     @GET
@@ -48,7 +45,7 @@ public class SteamResource {
 
         return ids.stream()
                 .map(i -> steamService.getGamePrice("price_overview", i))
-                .map(i -> gamePriceDtoMapper.toDto(i))
+                .map(i -> steamMapper.toGamePriceDto(i))
                 .toList();
     }
 
