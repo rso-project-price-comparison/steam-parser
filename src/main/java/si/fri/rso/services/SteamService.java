@@ -6,7 +6,6 @@ import si.fri.rso.services.dtos.game_price_response.GamePriceResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
-import java.util.List;
 import java.util.Map;
 
 
@@ -16,6 +15,6 @@ public interface SteamService {
 
     @GET
     @Path("/appdetails")
-    Map <String, GamePriceResponse> getGamePrice(@QueryParam("filters") String filters, @QueryParam("appids") List<String> appids);
+    Map <String, GamePriceResponse> getGamePrice(@QueryParam("filters") String filters, @QueryParam("appids") String appid);
 
 }
