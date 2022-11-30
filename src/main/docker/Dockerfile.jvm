@@ -7,7 +7,7 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.jvm -t quarkus/steam-parser-jvm .
+# docker build -f src/main/docker/Dockerfile.jvm -t tjasad/rso-steam-parser .
 #
 # Then run the container using:
 #
@@ -84,7 +84,6 @@ ENV LANGUAGE='en_US:en'
 COPY --chown=185 target/quarkus-app/lib/ /deployments/lib/
 COPY --chown=185 target/quarkus-app/*.jar /deployments/
 COPY --chown=185 target/quarkus-app/app/ /deployments/app/
-COPY --chown=185 target/quarkus-app/quarkus/ /deployments/quarkus/
 
 EXPOSE 8080
 USER 185
