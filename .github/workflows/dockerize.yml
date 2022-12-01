@@ -32,6 +32,6 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v3
         with:
-          file: ./src/main/docker/Dockerfile.jvm
+          file: ./Dockerfile.jvm
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/rso-steam-parser:${{ steps.current-time.outputs.formattedTime }}
