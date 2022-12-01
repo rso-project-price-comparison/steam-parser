@@ -20,9 +20,9 @@
 #
 # docker run -i --rm -p 8080:8080 quarkus/steam-parser-jvm
 
+FROM maven:3.8.6-openjdk-18 AS build
 COPY ./ /app
 WORKDIR /app
-FROM maven:3.8.6-openjdk-18 AS build
 RUN mvn --show-version --update-snapshots --batch-mode clean package
 
 FROM registry.access.redhat.com/ubi8/openjdk-17:1.14
