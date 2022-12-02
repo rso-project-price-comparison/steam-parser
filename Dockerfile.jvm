@@ -20,13 +20,14 @@
 #
 # docker run -i --rm -p 8080:8080 quarkus/steam-parser-jvm
 
-FROM registry.access.redhat.com/ubi8/openjdk-17:1.14 as build
+FROM openjdk:15-jdk-slim as bulid
 
 COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
 
+RUN chmod +x mvnw
 RUN ./mvnw  package
 
 
