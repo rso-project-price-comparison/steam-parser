@@ -1,52 +1,25 @@
 package si.fri.rso;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.quarkus.arc.Arc;
-import org.eclipse.microprofile.rest.client.inject.RestClient;
 import si.fri.rso.services.dtos.GameBySearchDto;
 import si.fri.rso.services.dtos.GamePriceDto;
-import si.fri.rso.services.SteamCommunityService;
-import si.fri.rso.services.SteamService;
-import si.fri.rso.services.mappers.SteamMapper;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @Path("/steam")
-public class SteamResource {
-
-    @RestClient
-    SteamCommunityService steamCommunityService;
-    @RestClient
-    SteamService steamService;
-    @Inject
-    SteamMapper steamMapper;
-
-    @PostConstruct
-    void init() {
-        ObjectMapper objectMapper = Arc.container().instance(ObjectMapper.class).get();
-        objectMapper.enable(DeserializationFeature. ACCEPT_SINGLE_VALUE_AS_ARRAY);
-    }
-
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+public interface SteamResource {
     @GET
     @Path("/games")
-    public List<GameBySearchDto> getGamesBySearchString(@QueryParam("searchString")String searchString) {
-        return steamMapper.toGameBySearchDto(steamCommunityService.getGameBySearch(searchString));
-    }
+    List<GameBySearchDto> getGamesBySearchString(@QueryParam("searchString") String searchString);
 
     @GET
     @Path("/prices")
-    public List<GamePriceDto> getGamePrices(@QueryParam("ids") List<String> ids) {
-
-        return ids.stream()
-                .map(i -> steamService.getGamePrice("price_overview", i))
-                .map(i -> steamMapper.toGamePriceDto(i))
-                .toList();
-    }
-
+    List<GamePriceDto> getGamePrices(@QueryParam("ids") List<String> ids);
 }

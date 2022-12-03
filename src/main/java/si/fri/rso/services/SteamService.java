@@ -15,6 +15,5 @@ public interface SteamService {
 
     @GET
     @Path("/appdetails")
-    Map <String, GamePriceResponse> getGamePrice(@QueryParam("filters") String filters, @QueryParam("appids") String appid);
-
+    Map<String, GamePriceResponse> getGamePrice(@QueryParam("filters") String filters, @QueryParam("appids") String appid);
 }

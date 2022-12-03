@@ -1,25 +1,3 @@
-####
-# This Dockerfile is used in order to build a container that runs the Quarkus application in JVM mode
-#
-# Before building the container image run:
-#
-# ./mvnw package
-#
-# Then, build the image with:
-#
-# docker build -f src/main/docker/Dockerfile.jvm -t tjasad/rso-steam-parser .
-#
-# Then run the container using:
-#
-# docker run -i --rm -p 8080:8080 quarkus/steam-parser-jvm
-#
-# If you want to include the debug port into your docker image
-# you will have to expose the debug port (default 5005) like this :  EXPOSE 8080 5005
-#
-# Then run the container using :
-#
-# docker run -i --rm -p 8080:8080 quarkus/steam-parser-jvm
-
 FROM quay.io/quarkus/ubi-quarkus-graalvmce-builder-image:22.3-java17 AS build
 
 COPY --chown=quarkus:quarkus .mvn /code/.mvn

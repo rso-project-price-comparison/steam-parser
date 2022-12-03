@@ -7,21 +7,22 @@ import si.fri.rso.services.dtos.game_price_response.GamePriceResponse;
 import si.fri.rso.services.dtos.game_price_response.PriceData;
 import si.fri.rso.services.dtos.games_by_search_response.GamesBySearchResponse;
 
-import javax.enterprise.context.RequestScoped;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@RequestScoped
+
 public class SteamMapper {
 
-    public List<GameBySearchDto> toGameBySearchDto(List<GamesBySearchResponse> response) {
+    private SteamMapper() {}
+
+    public static List<GameBySearchDto> toGameBySearchDto(List<GamesBySearchResponse> response) {
         return response.stream()
                 .map(g -> new GameBySearchDto(g.name(), g.appid(), StoreEnum.STEAM))
                 .toList();
     }
 
-    public GamePriceDto toGamePriceDto(Map<String, GamePriceResponse> response) {
+    public static GamePriceDto toGamePriceDto(Map<String, GamePriceResponse> response) {
 
         Map.Entry<String, GamePriceResponse> gamePriceResponse = response.entrySet().iterator().next();
         String key = gamePriceResponse.getKey();
