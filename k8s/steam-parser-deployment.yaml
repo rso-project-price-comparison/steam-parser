@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: steam-parser-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: steam-parser
+  template:
+    metadata:
+      labels:
+        app: steam-parser
+    spec:
+      containers:
+        - image: tjasad/rso-steam-parser:2022-12-03-12-38-35
+          name: steam-parser
+          resources:
+            limits:
+              memory: 512Mi
+          ports:
+            - containerPort: 8080
+              name: server
+              protocol: TCP
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: steam-parser
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: server
+  selector:
+    app: steam-parser

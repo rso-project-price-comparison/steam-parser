@@ -35,16 +35,16 @@ class SteamResourceImplTest {
 
     @Test
     void testGetGameBySearchMissingQueryParameterSearchString() {
-        given().when().get("/steam/games").then().statusCode(400);
+        given().when().get("/api/v1/steam/game").then().statusCode(400);
     }
 
     @Test
     void testGetGameBySearch() {
-        given().when().get("/steam/games?searchString=1").then().statusCode(200).body(is("[{\"name\":\"Igrica\",\"appid\":\"1\",\"storeEnum\":\"STEAM\"}]"));
+        given().when().get("/api/v1/steam/game?searchString=1").then().statusCode(200).body(is("[{\"name\":\"Igrica\",\"appid\":\"1\",\"storeEnum\":\"STEAM\"}]"));
     }
 
     @Test
     void testGetGamePrices() {
-        given().when().get("/steam/prices?ids=292030").then().statusCode(200).body(is("[{\"gameId\":\"292030\",\"finalPrice\":9.75,\"currency\":\"EUR\",\"storeEnum\":\"STEAM\"}]"));
+        given().when().get("/api/v1/steam/price?ids=292030").then().statusCode(200).body(is("[{\"gameId\":\"292030\",\"finalPrice\":9.75,\"currency\":\"EUR\",\"storeEnum\":\"STEAM\"}]"));
     }
 }
