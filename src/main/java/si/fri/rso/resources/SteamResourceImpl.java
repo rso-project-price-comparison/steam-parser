@@ -1,4 +1,4 @@
-package si.fri.rso;
+package si.fri.rso.resources;
 
 import si.fri.rso.domain.GameFetch;
 import si.fri.rso.services.dtos.GameBySearchDto;
