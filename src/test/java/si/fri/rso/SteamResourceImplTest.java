@@ -5,7 +5,7 @@ import io.quarkus.test.junit.mockito.InjectMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import si.fri.rso.domain.GameFetch;
+import si.fri.rso.services.domain.GameFetch;
 import si.fri.rso.services.dtos.game_price_response.GamePriceResponse;
 import si.fri.rso.services.dtos.game_price_response.PriceData;
 import si.fri.rso.services.dtos.game_price_response.PriceOverview;
