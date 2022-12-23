@@ -1,6 +1,6 @@
 package si.fri.rso.resources;
 
-import si.fri.rso.domain.GameFetch;
+import si.fri.rso.services.domain.GameFetch;
 import si.fri.rso.services.dtos.GameBySearchDto;
 import si.fri.rso.services.dtos.GamePriceDto;
 import si.fri.rso.services.mappers.SteamMapper;

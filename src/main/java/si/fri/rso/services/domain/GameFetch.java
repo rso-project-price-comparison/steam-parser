@@ -1,4 +1,4 @@
-package si.fri.rso.domain;
+package si.fri.rso.services.domain;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,7 +32,7 @@ public class GameFetch {
         return steamCommunityService.getGameBySearch(searchString);
     }
 
-    public Map<String, GamePriceResponse>  getGamePrice(String id) {
-        return steamService.getGamePrice("price_overview", id);
+    public Map<String, GamePriceResponse>  getGamePrice(String ids) {
+        return steamService.getGamePrice("price_overview", ids);
     }
 }
