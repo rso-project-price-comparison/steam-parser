@@ -13,7 +13,7 @@ spec:
         app: steam-parser
     spec:
       containers:
-        - image: tjasad/rso-steam-parser:2022-12-04-08-29-45
+        - image: tjasad/rso-steam-parser:latest
           name: steam-parser
           resources:
             limits:
@@ -30,7 +30,7 @@ kind: Service
 metadata:
   name: steam-parser
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - port: 8080
       protocol: TCP
