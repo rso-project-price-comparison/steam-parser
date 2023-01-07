@@ -22,6 +22,9 @@ spec:
             - containerPort: 8080
               name: server
               protocol: TCP
+            - containerPort: 9000
+              name: grpc
+
 
 ---
 
@@ -33,7 +36,9 @@ spec:
   type: ClusterIP
   ports:
     - port: 8080
-      protocol: TCP
       targetPort: server
+      protocol: TCP
+    - port: 9000
+      targetPort: grpc
   selector:
     app: steam-parser
