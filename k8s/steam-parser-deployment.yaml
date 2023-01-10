@@ -19,12 +19,12 @@ spec:
             limits:
               memory: 512Mi
           ports:
-            - containerPort: 8080
-              name: server
-              protocol: TCP
             - containerPort: 9000
-              name: grpc
-
+              name: grpc-server
+              protocol: TCP
+          env:
+            - name: QUARKUS_GRPC_SERVER_HOST
+              value: 0.0.0.0
 
 ---
 
@@ -35,10 +35,8 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: 8080
-      targetPort: server
-      protocol: TCP
-    - port: 9000
-      targetPort: grpc
+    - name: grpc
+      port: 9000
+      targetPort: 9000
   selector:
     app: steam-parser
